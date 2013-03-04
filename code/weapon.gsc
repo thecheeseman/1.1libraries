@@ -156,34 +156,34 @@ update_info( oObject, sData ) {
 
 // These settings reflect the default weapon files.
 default_settings() {
-    add_info( "bar_mp", "M1918 Browning Automatic Rifle", "lmg", 20, 200, 300 );
-    add_info( "bar_slow_mp", "M198 Browning Automatic Rifle (slow)", "lmg", 20, 200, 300 );
-    add_info( "bren_mp", "Bren", "lmg", 30, 240, 300 );
-    add_info( "colt_mp", "Colt .45", "pistol", 7, 35, 56 );
-    add_info( "enfield_mp", "Lee-Enfield", "rifle", 10, 100, 160 );
-    add_info( "fg42_mp", "Fallschirmjaegergewehr 42", "lmg", 30, 160, 320 );
-    add_info( "fg42_semi_mp", "Fallschirmjegergewehr 42 (semi)", "lmgsemi", 30, 160, 320 );
-    add_info( "fraggrenade_mp", "MK2 Fragmentation Grenade", "grenade", 3, 3, 3 );
-    add_info( "kar98k_mp", "Karabiner 98 Kurz", "rifle", 5, 60, 125 );
-    add_info( "kar98k_sniper_mp", "Karabiner 98 Kurz w/ Scope", "rifle", 5, 60, 150 );
-    add_info( "luger_mp", "Luger", "pistol", 8, 40, 64 );
-    add_info( "m1carbine_mp", "M1A1 Carbine", "riflesemi", 15, 300, 400 );
-    add_info( "m1garand_mp", "M1 Garand", "riflesemi", 8, 192, 240 );
-    add_info( "mk1britishfrag_mp", "N23 MKII Mills Bomb", "grenade", 3, 3, 3 );
-    add_info( "mosin_nagant_mp", "Mosin-Nagant", "rifle", 5, 60, 150 );
-    add_info( "mosin_nagant_sniper_mp", "Mosin-Nagant w/ Scope", "rifle", 5, 60, 150 );
-    add_info( "mp40_mp", "Maschinenpistole 40", "smg", 32, 256, 320 );
-    add_info( "mp44_mp", "Sturmgewehr 44", "lmg", 30, 180, 240 );
-    add_info( "mp44_semi_mp", "Sturmgewehr 44 (semi)", "lmgsemi", 30, 180, 240 );
-    add_info( "panzerfaust_mp", "Panzerfaust", "rocket", 1, 1, 1 );
-    add_info( "ppsh_mp", "PPSh-41", "smg", 71, 284, 355 );
-    add_info( "ppsh_semi_mp", "PPSh-41 (semi)", "smgsemi", 71, 284, 355 );
-    add_info( "rgd-33russianfrag_mp", "RGD-33 Fragmentation Grenade", "grenade", 3, 3, 3 );
-    add_info( "springfield_mp", "M1903 Springfield", "rifle", 5, 100, 200 );
-    add_info( "sten_mp", "Sten", "smg", 32, 224, 320 );
-    add_info( "stielhandgranate_mp", "Model 24 Stielhandgranate", "grenade", 3, 3, 3 );
-    add_info( "thompson_mp", "M1A1 Thompson", "smg", 30, 270, 360 );
-    add_info( "thompson_semi_mp", "M1A1 Thompson", "smgsemi", 30, 270, 360 );
+    add_info( "bar_mp", "M1918 Browning Automatic Rifle", "lmg", "assault", 20, 200, 300 );
+    add_info( "bar_slow_mp", "M198 Browning Automatic Rifle (slow)", "lmg", "assault", 20, 200, 300 );
+    add_info( "bren_mp", "Bren", "lmg", "assault", 30, 240, 300 );
+    add_info( "colt_mp", "Colt .45", "pistol", "pistol", 7, 35, 56 );
+    add_info( "enfield_mp", "Lee-Enfield", "rifle", "rifle", 10, 100, 160 );
+    add_info( "fg42_mp", "Fallschirmjaegergewehr 42", "lmg", "assault", 30, 160, 320 );
+    add_info( "fg42_semi_mp", "Fallschirmjegergewehr 42 (semi)", "lmgsemi", "assault", 30, 160, 320 );
+    add_info( "fraggrenade_mp", "MK2 Fragmentation Grenade", "grenade", "grenade", 3, 3, 3 );
+    add_info( "kar98k_mp", "Karabiner 98 Kurz", "rifle", "rifle", 5, 60, 125 );
+    add_info( "kar98k_sniper_mp", "Karabiner 98 Kurz w/ Scope", "rifle", "sniper", 5, 60, 150 );
+    add_info( "luger_mp", "Luger", "pistol", "pistol", 8, 40, 64 );
+    add_info( "m1carbine_mp", "M1A1 Carbine", "riflesemi", "rifle", 15, 300, 400 );
+    add_info( "m1garand_mp", "M1 Garand", "riflesemi", "rifle", 8, 192, 240 );
+    add_info( "mk1britishfrag_mp", "N23 MKII Mills Bomb", "grenade", "grenade", 3, 3, 3 );
+    add_info( "mosin_nagant_mp", "Mosin-Nagant", "rifle", "rifle", 5, 60, 150 );
+    add_info( "mosin_nagant_sniper_mp", "Mosin-Nagant w/ Scope", "rifle", "sniper", 5, 60, 150 );
+    add_info( "mp40_mp", "Maschinenpistole 40", "smg", "assault", 32, 256, 320 );
+    add_info( "mp44_mp", "Sturmgewehr 44", "lmg", "assault", 30, 180, 240 );
+    add_info( "mp44_semi_mp", "Sturmgewehr 44 (semi)", "lmgsemi", "assault", 30, 180, 240 );
+    add_info( "panzerfaust_mp", "Panzerfaust", "rocket", "rocket", 1, 1, 1 );
+    add_info( "ppsh_mp", "PPSh-41", "smg", "assault", 71, 284, 355 );
+    add_info( "ppsh_semi_mp", "PPSh-41 (semi)", "smgsemi", "assault", 71, 284, 355 );
+    add_info( "rgd-33russianfrag_mp", "RGD-33 Fragmentation Grenade", "grenade", "grenade", 3, 3, 3 );
+    add_info( "springfield_mp", "M1903 Springfield", "rifle", "sniper", 5, 100, 200 );
+    add_info( "sten_mp", "Sten", "smg", "assault", 32, 224, 320 );
+    add_info( "stielhandgranate_mp", "Model 24 Stielhandgranate", "grenade", "grenade", 3, 3, 3 );
+    add_info( "thompson_mp", "M1A1 Thompson", "smg", "assault", 30, 270, 360 );
+    add_info( "thompson_semi_mp", "M1A1 Thompson", "smgsemi", "assault", 30, 270, 360 );
 }
 
 default_loadout() {

@@ -17,6 +17,6 @@
 */
 
 write( sMessage ) {
-    if ( level.developer ) iPrintLn( "log::write( " + sMessage + " )" );
+    if ( cvar::get_global( "dev_mode" ) ) iPrintLn( "log::write( " + sMessage + " )" );
     logPrint( sMessage );
 }
