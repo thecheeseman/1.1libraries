@@ -39,3 +39,32 @@ default_fog() {
         default:                                                                break;
     }
 }
+
+set_fog( sType, nCloseDistance, nFarDistance, vColor, iTime ) {
+    if ( !isDefined( sType ) || !isDefined( nCloseDistance ) || !isDefined( nFarDistance ) || !isDefined( vColor ) )
+        return false;
+        
+/*** begin type checking ***/
+    if ( ( !type::is_float( nCloseDistance ) && !type::is_int( nCloseDistance ) ) || ( !type::is_float( nFarDistance ) && !type::is_int( nFarDistance ) ) ) {
+        throw::exception( "invalid type [excepted int/float]", "weather(49)" );
+        return false;
+    }
+    
+    if ( !isDefined( iTime ) )
+        iTime = 0;
+        
+    // attempt to parse this color
+    vColor = color::parse( vColor );
+    
+    switch ( string::tolower( sType ) ) {
+        case "cullfog":
+            setCullFog( nCloseDistance, nFarDistance, vColor[ 0 ], vColor[ 1 ], vColor[ 2 ], iTime );
+            break;
+        case "expfog":
+            setExpFog( nFarDistance, vColor[ 0 ], vColor[ 1 ], vColor[ 2 ], iTime );
+            break;
+        default:
+            return false;
+            break;
+    }
+}
