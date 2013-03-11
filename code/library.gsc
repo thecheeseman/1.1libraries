@@ -24,5 +24,5 @@ load_all() {
     color::init();
     hud::init();
     weapon::default_settings();
-    weather::default_fog();
+    weather::init();
 }

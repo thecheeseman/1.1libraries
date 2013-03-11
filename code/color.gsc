@@ -966,6 +966,7 @@ init() {
     add_color( "yellow tan", ( 1.0, 0.8902, 0.43137 ) );
     add_color( "yellowy brown", ( 0.68235, 0.5451, 0.04706 ) );
     add_color( "yellowy green", ( 0.74902, 0.9451, 0.15686 ) );
+    add_color( "zombie dark", ( 0.05, 0.05, 0.05 ) );
 }
 
 add_color( sColorName, vColor ) {

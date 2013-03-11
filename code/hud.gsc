@@ -33,6 +33,172 @@ init() {
     level.fontHeight = 12;
 }
 
+message_init() {   
+    titleSize = 2.5;
+    textSize = 1.75;
+    iconSize = 30;
+    point = "top";
+    relativePoint = "bottom";
+    yOffset = 60;
+    xOffset = 320;
+	
+	self.notifyTitle = self create_element( "text", titleSize );
+	self.notifyTitle set_point( point, undefined, xOffset, yOffset );
+	self.notifyTitle.archived = false;
+	self.notifyTitle.alpha = 0;
+
+	self.notifyText = self create_element( "text", textSize );
+	self.notifyText set_parent( self.notifyTitle );
+	self.notifyText set_point( point, relativePoint, 0, yOffset + 40 );
+	self.notifyText.archived = false;
+	self.notifyText.alpha = 0;
+
+	self.notifyText2 = self create_element( "text", textSize );
+	self.notifyText2 set_parent( self.notifyTitle );
+	self.notifyText2 set_point( point, relativePoint, 0, 0 );
+	self.notifyText2.archived = false;
+	self.notifyText2.alpha = 0;
+
+	self.notifyIcon = self create_element( "icon", "white", iconSize, iconSize );
+	self.notifyIcon set_parent( self.notifyText2 );
+	self.notifyIcon set_point( point, relativePoint, 0, 0 );
+	self.notifyIcon.archived = false;
+	self.notifyIcon.alpha = 0;
+
+	self.doingNotify = false;
+	self.notifyQueue = [];
+}
+
+create_notify( sTitle, sTitleLabel, sNotify, sNotifyLabel, sIcon, sSound, iDuration ) {
+    data = spawnstruct();
+    
+    data.titletext = &"";
+    data.titlelabel = &"";
+    data.titleisstring = true;
+    data.notifytext = &"";
+    data.textlabel = &"";
+    data.textisstring = true;
+    data.icon = undefined;
+    data.sound = undefined;
+    data.duration = 4;
+    
+    if ( isDefined( sTitle ) )
+        data.titletext = sTitle;
+    if ( isDefined( sTitleLabel ) )
+        data.titlelabel = sTitleLabel;
+    if ( isDefined( sTitle ) && ( type::is_int( sTitle ) || type::is_float( sTitle ) ) )
+        data.titleisstring = false;
+    if ( isDefined( sNotify ) )
+        data.notifytext = sNotify;
+    if ( isDefined( sNotifyLabel ) )
+        data.textlabel = sNotifyLabel;
+    if ( isDefined( sNotify) && ( type::is_int( sNotify ) || type::is_float( sNotify ) ) )
+        data.textisstring = false;
+    if ( isDefined( sIcon ) )
+        data.icon = sIcon;
+    if ( isDefined( sSound ) )
+        data.sound = sSound;
+    if ( isDefined( iDuration ) )
+        data.duration = iDuration;
+    
+    return data;
+}
+
+notify_message( data ) {
+    self endon( "death" );
+    self endon( "disconnect" );
+    
+    if ( !self.doingNotify ) {
+        pthread::create( undefined, ::run_notify, self, data, true );
+        return;
+    }
+    
+    self.notifyQueue[ self.notifyQueue.size ] = data;
+}
+
+run_notify( data ) {
+    self endon( "disconnect" );
+    
+    self.doingNotify = true;
+
+    anchorelem = self.notifyTitle;
+    
+    if ( !isDefined( data.duration ) )
+        data.duration = 4;
+        
+    if ( isDefined( data.sound ) )
+        self playLocalSound( data.sound );
+        
+    if ( isDefined( data.titletext ) ) {
+        self.notifyTitle fadeOverTime( 1.0 );
+        
+        if ( isDefined( data.titlelabel ) )
+            self.notifyTitle.label = data.titlelabel;
+        else
+            self.notifyTitle.label = &"";
+            
+        if ( isDefined( data.titlelabel ) && !data.titleisstring ) 
+            self.notifyTitle setValue( data.titletext );
+        else 
+            self.notifyTitle setText( data.titletext );
+
+        self.notifyTitle.alpha = 1;
+    }
+    
+    if ( isDefined( data.notifytext ) ) {
+        self.notifyText fadeOverTime( 1.0 );
+        
+        if ( isDefined( data.textlabel ) )
+            self.notifyText.label = data.textlabel;
+        else
+            self.notifyText.label = &"";
+            
+        if ( isDefined( data.textlabel ) && !data.textisstring )
+            self.notifyText setValue( data.notifytext );
+        else
+            self.notifyText setText( data.notifytext );
+        self.notifyText.alpha = 1;
+    }
+    
+    if ( isDefined( data.icon ) ) {
+        self.notifyIcon set_parent( anchorelem );
+        self.notifyIcon setShader( data.icon, 60, 60 );
+		self.notifyIcon.alpha = 0;
+		self.notifyIcon fadeOverTime( 1.0 );
+		self.notifyIcon.alpha = 1;
+        
+        wait ( data.duration );
+
+		self.notifyIcon fadeOverTime( 0.75 );
+		self.notifyIcon.alpha = 0;
+    }
+    else {
+        wait ( data.duration );
+        
+        if ( isDefined( data.titletext ) ) {
+            self.notifyTitle fadeOverTime( 0.75 );
+            self.notifyTitle.alpha = 0;
+        }
+        if ( isDefined( data.notifytext ) ) {
+            self.notifyText fadeOverTime( 0.75 );
+            self.notifyText.alpha = 0;
+        }
+        
+        wait ( 0.75 );
+    }
+    
+    self.doingNotify = false;
+    
+    if ( self.notifyQueue.size > 0 ) {
+        next = self.notifyQueue[ 0 ];
+
+        for ( i = 1; i < self.notifyQueue.size; i++ ) 
+            self.notifyQueue[ i - 1 ] = self.notifyQueue[ i ];
+        self.notifyQueue[ i - 1 ] = undefined;
+
+        pthread::create( undefined, ::run_notify, self, next, true );
+    }
+}
 
 create_element( sType, oArg1, oArg2, oArg3 ) {
     if ( !isDefined( sType ) )
