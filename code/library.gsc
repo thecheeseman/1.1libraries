@@ -18,11 +18,32 @@
 
 load_all() {
     level.fFrameTime = ( 1 / getCvarInt( "sv_fps" ) );
+    level.libraries = [];
     
     // run all the necessary functions so that the libraries run properly :D
-    defines::init();
-    color::init();
-    hud::init();
-    weapon::default_settings();
-    weather::init();
+    load( "defines" );
+    load( "color" );
+    load( "hud" );
+    load( "weapon" );
+    load( "weather" );
+}
+
+load( sLibrary ) {
+    if ( !isDefined( sLibrary ) )
+        return false;
+        
+    // already loaded library?
+    if ( isDefined( level.libraries[ sLibrary ] ) )
+        return true;
+        
+    switch ( sLibrary ) {
+        case "color":       color::init();              break;
+        case "defines":     defines::init();            break;
+        case "hud":         hud::init();                break;
+        case "weapon":      weapon::default_settings(); break;
+        case "weather":     weather::init();            break;
+        default:            return false;               break;
+    }
+    
+    level.libraries[ sLibrary ] = true;
 }

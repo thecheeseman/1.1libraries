@@ -54,6 +54,9 @@ init() {
         z = endz - ( 65536 * trace[ "fraction" ] ) - 100;
         
     level.center = ( x, y, z );
+    
+    level.weatherEvent = false;
+    level.weatherQueue = [];
 
     default_fog();
 }
@@ -120,8 +123,6 @@ create_weather_event( sType, iTransitionTime, iLength ) {
     event.starttime = iTransitionTime;
     event.length = iLength;
     event.haslightning = false;
-    
-    iprintln( "creating event" );
         
     switch ( sType ) {
         case "haboob":
@@ -221,7 +222,6 @@ lightning_runner( event ) {
     while ( runtime < totaltime ) {
         if ( waittime == 0 ) {
             // lightning
-            iprintln( "lightning" );
             playfx( level._effect[ "lowlevelburst" ], level.center );
             waittime = math::rand_range( 10, 30 );
         }
