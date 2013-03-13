@@ -23,6 +23,7 @@ load_all() {
     // run all the necessary functions so that the libraries run properly :D
     load( "defines" );
     load( "color" );
+    load( "flag" );
     load( "hud" );
     load( "weapon" );
     load( "weather" );
@@ -39,6 +40,7 @@ load( sLibrary ) {
     switch ( sLibrary ) {
         case "color":       color::init();              break;
         case "defines":     defines::init();            break;
+        case "flag":        flag::init();               break;
         case "hud":         hud::init();                break;
         case "weapon":      weapon::default_settings(); break;
         case "weather":     weather::init();            break;

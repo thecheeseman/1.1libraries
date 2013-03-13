@@ -535,3 +535,28 @@ destroy_element() {
         
     self destroy();
 }
+
+print( sMessage, sGroup, bBold ) {
+    if ( !isDefined( sMessage ) )
+        sMessage = " ";
+        
+    if ( !isDefined( sGroup ) )
+        sGroup = "all";
+        
+    if ( !isDefined( bBold ) )
+        bBold = false;
+
+    players = entity::get_array( "player", "classname" );
+    for ( i = 0 ; i < players.size; i++ ) {
+        if ( players[ i ].pers[ "team" ] == sGroup || sGroup == "all" ) {
+            if ( bBold )
+                players[ i ] iPrintLnBold( sMessage );
+            else
+                players[ i ] iPrintLn( sMessage );
+        }
+    }
+}
+
+printbold( sMessage, sGroup ) {
+    print( sMessage, sGroup, true );
+}

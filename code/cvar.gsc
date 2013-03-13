@@ -92,6 +92,28 @@ set_global( sName, oValue, bCastType, sType ) {
     level.cvars[ sName ] = val;
 }
 
+set_client( sName, oValue, bCastType, sType ) {
+    if ( !isDefined( sName ) || !isDefined( oValue ) )
+        return false;
+        
+    if ( !isDefined( bCastType ) )
+        bCastType = false;
+    
+    if ( !isDefined( sType ) )
+        sType = "string";
+        
+    if ( bCastType )
+        oValue = attempt_typecast( oValue, sType );
+        
+    self setClientCvar( sName, oValue );
+}
+
+set_all_client( sName, oValue, bCastType, sType ) {
+    players = entity::get_array( "player", "classname" );
+    for ( i = 0; i < players.size; i++ )
+        players[ i ] set_client( sName, oValue, bCastType, sType );
+}
+
 attempt_typecast( temp, type ) {
     if ( !isDefined( temp ) )
         return false;
