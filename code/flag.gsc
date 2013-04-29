@@ -28,7 +28,7 @@ create( sFlag ) {
     if ( !isDefined( sFlag ) )
         return false;
         
-    if ( isDefined( level.flag[ sFlag ) )
+    if ( isDefined( level.flag[ sFlag ] ) )
         return false;
         
     level.flag[ sFlag ] = false;
@@ -52,7 +52,13 @@ get( sFlag ) {
     return true;
 }
 
-wait( sFlag ) {
+// only here because flag::isset looks better than flag::get when
+// it's used in an if statement :D
+isset( sFlag ) {
+    return get( sFlag );
+}
+
+waitfor( sFlag ) {
     if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
         return false;
         
