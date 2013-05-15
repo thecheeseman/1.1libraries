@@ -34,6 +34,13 @@ create( sFlag ) {
     level.flag[ sFlag ] = false;
 }
 
+remove( sFlag ) {
+    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+        return false;
+        
+    level.flag[ sFlag ] = undefined;
+}
+
 set( sFlag ) {
     if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
         return false;
