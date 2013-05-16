@@ -17,11 +17,12 @@
 */
 
 load_all() {
-    level.fFrameTime = ( 1 / getCvarInt( "sv_fps" ) );
+    level.fFrameTime = (float)( (float)1 / getCvarInt( "sv_fps" ) );
     level.libraries = [];
     
     // run all the necessary functions so that the libraries run properly :D
     load( "defines" );
+    load( "clock" );
     load( "color" );
     load( "flag" );
     load( "hud" );
@@ -38,6 +39,7 @@ load( sLibrary ) {
         return true;
         
     switch ( sLibrary ) {
+        case "clock":       clock::init();              break;
         case "color":       color::init();              break;
         case "defines":     defines::init();            break;
         case "flag":        flag::init();               break;
