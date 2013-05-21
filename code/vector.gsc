@@ -28,12 +28,12 @@ scale( vecA, scale ) {
         
 /*** begin type checking ***/
     if ( !type::is_vector( vecA ) ) {
-        throw::exception( "invalid type [expected int]", "vector::scale(27)" );
+        throw::exception( "invalid type [expected vector]", "vector::scale(30)" );
         return false;
     }
     
     if ( !type::is_float( scale ) && !type::is_int( scale ) ) {
-        throw::exception( "invalid type [expected int/float]", "vector::scale(32)" );
+        throw::exception( "invalid type [expected int/float]", "vector::scale(35)" );
         return false;
     }
 /*** end type checking ***/
@@ -53,7 +53,7 @@ multiply( vecA, vecB ) {
         
 /*** begin type checking ***/
     if ( !type::is_vector( vecA ) || !type::is_vector( vecB ) ) {
-        throw::exception( "invalid type [expected int]", "vector::scale(27)" );
+        throw::exception( "invalid type [expected vector]", "vector::multiply(55)" );
         return false;
     }
 /*** end type checking ***/
@@ -73,7 +73,7 @@ add( vecA, vecB ) {
         
 /*** begin type checking ***/
     if ( !type::is_vector( vecA ) || !type::is_vector( vecB ) ) {
-        throw::exception( "invalid type [expected int]", "vector::scale(27)" );
+        throw::exception( "invalid type [expected vector]", "vector::add(75)" );
         return false;
     }
 /*** end type checking ***/   
@@ -93,7 +93,7 @@ subtract( vecA, vecB ) {
         
 /*** begin type checking ***/
     if ( !type::is_vector( vecA ) || !type::is_vector( vecB ) ) {
-        throw::exception( "invalid type [expected int]", "vector::scale(27)" );
+        throw::exception( "invalid type [expected vector]", "vector::subtract(95)" );
         return false;
     }
 /*** end type checking ***/

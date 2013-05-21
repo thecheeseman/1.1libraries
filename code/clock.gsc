@@ -20,7 +20,7 @@ init() {
     level.timestamp = 0;
     level.unixtimestamp = 0;
     
-    pthread::create( undefined, ::clock_runner, level, undefined, true );
+    pthread::create( undefined, ::timestamp_runner, level, undefined, true );
 }
 
 update() {
@@ -34,7 +34,7 @@ update() {
     return false;
 }
 
-clock_runner() {
+timestamp_runner() {
     serverframes = getCvarInt( "sv_fps" );
     currentframe = 0;
 

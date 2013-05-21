@@ -79,3 +79,29 @@ get_all() {
         
     return eEnts;
 }
+
+/*
+    object[] get_players( string team )
+    players = entity::get_players( "axis" );
+    
+    Returns all the players on the server at the moment, potentially on team [sTeam]
+*/
+get_players( sTeam, bAliveOnly ) {
+    if ( !isDefined( sTeam ) )
+        sTeam = "all";
+        
+    if ( !isDefined( bAliveOnly ) )
+        bAliveOnly = false;
+        
+    eEnts = get_array( "player", "classname" );
+    aOurPlayers = [];
+    
+    for ( i = 0; i < eEnts.size; i++ ) {
+        if ( eEnts[ i ].pers[ "team" ] == sTeam || sTeam == "all" ) {
+            if ( ( bAliveOnly && isAlive( eEnts[ i ] ) ) || !bAliveOnly )
+                aOurPlayers[ aOurPlayers.size ] = eEnts[ i ];
+        }
+    }
+    
+    return aOurPlayers;
+}
