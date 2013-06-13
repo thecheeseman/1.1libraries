@@ -26,8 +26,8 @@ get( sName, bSetIfBlank, oDefaultValue ) {
     }
     
     // first let's check if the cvar is blank
-    temp = getCvar( sName );
-    if ( temp == "" ) {
+    sValue = getCvar( sName );
+    if ( sValue == "" ) {
         // if it is, most likely it's not been defined already
         // so shall we set it?
         if ( bSetIfBlank ) {
@@ -42,7 +42,7 @@ get( sName, bSetIfBlank, oDefaultValue ) {
     // if this cvar has a value, let's try and grab it
     // this eliminates the need to call getCvarFloat/getCvarInt
     // as we can actually return types with one function
-    return attempt_typecast( temp );
+    return attempt_typecast( sValue );
 }
 
 get_global( sName, bSetIfBlank, oDefaultValue ) {
@@ -54,16 +54,16 @@ get_global( sName, bSetIfBlank, oDefaultValue ) {
         oDefaultValue = undefined;
     }
     
-    if ( !isDefined( level.cvars ) )
-        level.cvars = [];
+    if ( !isDefined( level.aCvars ) )
+        level.aCvars = [];
         
-    if ( !isDefined( level.cvars[ sName ] ) ) {
-        var = get( sName, bSetIfBlank, oDefaultValue );
-        level.cvars[ sName ] = var;
-        return var;
+    if ( !isDefined( level.aCvars[ sName ] ) ) {
+        oCvar = get( sName, bSetIfBlank, oDefaultValue );
+        level.aCvars[ sName ] = oCvar;
+        return oCvar;
     }
     
-    return level.cvars[ sName ];
+    return level.aCvars[ sName ];
 }    
 
 set( sName, oValue, bCastType, sType ) {
@@ -84,12 +84,12 @@ set( sName, oValue, bCastType, sType ) {
 }
 
 set_global( sName, oValue, bCastType, sType ) {
-    val = set( sName, oValue, bCastType, sType );
+    oCvar = set( sName, oValue, bCastType, sType );
     
-    if ( !isDefined( level.cvars ) )
-        level.cvars = [];
+    if ( !isDefined( level.aCvars ) )
+        level.aCvars = [];
         
-    level.cvars[ sName ] = val;
+    level.aCvars[ sName ] = oCvar;
 }
 
 set_client( sName, oValue, bCastType, sType ) {
@@ -109,22 +109,22 @@ set_client( sName, oValue, bCastType, sType ) {
 }
 
 set_all_client( sName, oValue, bCastType, sType ) {
-    players = entity::get_array( "player", "classname" );
-    for ( i = 0; i < players.size; i++ )
-        players[ i ] set_client( sName, oValue, bCastType, sType );
+    aPlayers = entity::get_array( "player", "classname" );
+    for ( i = 0; i < aPlayers.size; i++ )
+        aPlayers[ i ] set_client( sName, oValue, bCastType, sType );
 }
 
-attempt_typecast( temp, type ) {
-    if ( !isDefined( temp ) )
+attempt_typecast( oValue, sType ) {
+    if ( !isDefined( oValue ) )
         return false;
         
-    if ( !isDefined( type ) )
-        type = type::check( temp );
+    if ( !isDefined( sType ) )
+        sType = type::check( oValue );
         
-    switch ( type ) {
-        case "int":     return type::atoi( temp );
+    switch ( sType ) {
+        case "int":     return type::atoi( oValue );
         case "double":
-        case "float":   return type::atof( temp );
-        default:        return temp;
+        case "float":   return type::atof( oValue );
+        default:        return oValue;
     }
 }

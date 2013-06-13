@@ -18,7 +18,7 @@
 
 load_all() {
     level.fFrameTime = (float)( (float)1 / getCvarInt( "sv_fps" ) );
-    level.libraries = [];
+    level.aLibraries = [];
     
     // run all the necessary functions so that the libraries run properly :D
     load( "defines" );
@@ -35,7 +35,7 @@ load( sLibrary ) {
         return false;
         
     // already loaded library?
-    if ( isDefined( level.libraries[ sLibrary ] ) )
+    if ( isDefined( level.aLibraries[ sLibrary ] ) )
         return true;
         
     switch ( sLibrary ) {
@@ -49,5 +49,5 @@ load( sLibrary ) {
         default:            return false;               break;
     }
     
-    level.libraries[ sLibrary ] = true;
+    level.aLibraries[ sLibrary ] = true;
 }

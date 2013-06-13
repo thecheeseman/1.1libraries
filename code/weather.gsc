@@ -131,7 +131,6 @@ create_weather_event( sType, iTransitionTime, iLength ) {
             event.fogdistfar = 0.001;
             event.fogdistclose = 0.009;
             event.fogdistrandom = false;
-            iprintln( "haboob" );
             break;
         case "blizzard":
             event.fogtype = "expfog";
@@ -139,7 +138,6 @@ create_weather_event( sType, iTransitionTime, iLength ) {
             event.fogdistfar = 0.001;
             event.fogdistclose = 0.008;
             event.fogdistrandom = false;
-            iprintln( "blizzard" );
             break;
         case "stormy":
             event.fogtype = "expfog";
@@ -148,7 +146,6 @@ create_weather_event( sType, iTransitionTime, iLength ) {
             event.fogdistclose = 0.005;
             event.fogdistrandom = false;
             event.haslightning = true;
-            iprintln( "stormy" );
             break;
         default:
             event.type = "blank";

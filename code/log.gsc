@@ -17,6 +17,8 @@
 */
 
 write( sMessage ) {
-    if ( cvar::get_global( "dev_mode" ) ) iPrintLn( "log::write( " + sMessage + " )" );
-    logPrint( sMessage );
+    if ( cvar::get_global( "dev_mode" ) ) 
+        iPrintLn( "log::write( " + sMessage + " )" );
+        
+    logPrint( sMessage + "\n" );
 }

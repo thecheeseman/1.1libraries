@@ -17,16 +17,16 @@
 */
 
 init() {
-    level.timestamp = 0;
-    level.unixtimestamp = 0;
+    level.iTimeStamp = 0;
+    level.iUnixTimeStamp = 0;
     
     pthread::create( undefined, ::timestamp_runner, level, undefined, true );
 }
 
 update() {
-    timestamp = getCvar( "unix_timestamp" );
-    if ( timestamp != "" ) {
-        level.unixtimestamp = getCvarInt( "unix_timestamp" );
+    sTimeStamp = getCvar( "unix_timestamp" );
+    if ( sTimeStamp != "" ) {
+        level.iUnixTimeStamp = getCvarInt( "unix_timestamp" );
         setCvar( "unix_timestamp", "" );
         return true;
     }
@@ -35,19 +35,19 @@ update() {
 }
 
 timestamp_runner() {
-    serverframes = getCvarInt( "sv_fps" );
-    currentframe = 0;
+    iServerFrames = getCvarInt( "sv_fps" );
+    iCurrentFrame = 0;
 
     while ( true ) {
-        if ( currentframe > serverframes ) {
-            currentframe = 0;
+        if ( iCurrentFrame > iServerFrames ) {
+            iCurrentFrame = 0;
             
             if ( !update() )
-                level.unixtimestamp++;
+                level.iUnixTimeStamp++;
         }
             
-        level.timestamp = gettime();
+        level.iTimeStamp = gettime();
         wait ( level.fFrameTime );
-        currentframe++;
+        iCurrentFrame++;
     }
 }

@@ -973,36 +973,36 @@ add_color( sColorName, vColor ) {
     if ( !isDefined( sColorName ) || !isDefined( vColor ) )
         return false;
         
-    if ( !isDefined( level.colors ) )
-        level.colors = [];
+    if ( !isDefined( level.aColors ) )
+        level.aColors = [];
         
-    color = spawnstruct();
-    color.name = sColorName;
-    color.color = parse( vColor, true );
+    uColor = spawnstruct();
+    uColor.name = sColorName;
+    uColor.color = parse( vColor, true );
     
-    level.colors[ level.colors.size ] = color;
+    level.aColors[ level.aColors.size ] = uColor;
 }
 
 vector_to_rgb( vVector ) {
     if ( !isDefined( vVector ) || !type::is_vector( vVector ) )
         return false;
         
-    c1 = (int)( vVector[ 0 ] * 255 );
-    c2 = (int)( vVector[ 1 ] * 255 );
-    c3 = (int)( vVector[ 2 ] * 255 );
+    iR = (int)( vVector[ 0 ] * 255 );
+    iG = (int)( vVector[ 1 ] * 255 );
+    iB = (int)( vVector[ 2 ] * 255 );
     
-    return ( c1, c2, c3 );
+    return ( iR, iG, iB );
 }
 
 rgb_to_vector( vRGB ) {
     if ( !isDefined( vRGB ) || !type::is_vector( vRGB ) )
         return false;
         
-    c1 = ( vRGB[ 0 ] / 255 );
-    c2 = ( vRGB[ 1 ] / 255 );
-    c3 = ( vRGB[ 2 ] / 255 );
+    iX = ( vRGB[ 0 ] / 255 );
+    iY = ( vRGB[ 1 ] / 255 );
+    iZ = ( vRGB[ 2 ] / 255 );
     
-    return ( c1, c2, c3 );
+    return ( iX, iY, iZ );
 }
 
 parse( oObject, bSkipStringCheck ) {
@@ -1014,35 +1014,35 @@ parse( oObject, bSkipStringCheck ) {
         
     // is this an rgb/vector color?
     if ( type::is_vector( oObject ) ) {
-        c1 = oObject[ 0 ];
-        c2 = oObject[ 1 ];
-        c3 = oObject[ 2 ];
+        iX = oObject[ 0 ];
+        iY = oObject[ 1 ];
+        iZ = oObject[ 2 ];
         
         // vectors are only between 0 and 1
-        if ( c1 <= 1 && c2 <= 1 && c3 <= 1 )
+        if ( iX <= 1 && iY <= 1 && iZ <= 1 )
             return oObject;
             
         // otherwise, we need to convert to vector
-        c1 = ( c1 / 255 );
-        c2 = ( c2 / 255 );
-        c3 = ( c3 / 255 );
+        iX = ( iX / 255 );
+        iX = ( iY / 255 );
+        iX = ( iZ / 255 );
         
-        return ( c1, c2, c3 );
+        return ( iX, iY, iZ );
     }
     
     // otherwise, let's assume this is a string
-    color = ( 0, 0, 0 );
+    vColor = ( 0, 0, 0 );
     
     if ( bSkipStringCheck )
-        return color;
+        return vColor;
         
-    for ( i = 0; i < level.colors.size; i++ ) {
-        tmpcolor = level.colors[ i ];
-        if ( tmpcolor.name == string::tolower( oObject ) ) {
-            color = tmpcolor.color;
+    for ( i = 0; i < level.aColors.size; i++ ) {
+        uColor = level.aColors[ i ];
+        if ( uColor.name == string::tolower( oObject ) ) {
+            vColor = uColor.color;
             break;
         }
     }
     
-    return color;
+    return vColor;
 }

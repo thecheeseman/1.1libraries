@@ -17,7 +17,7 @@
 */
 
 init() {
-    level.flag = [];
+    level.aFlags = [];
     
     create( "game started" );
     create( "game over" );
@@ -28,32 +28,32 @@ create( sFlag ) {
     if ( !isDefined( sFlag ) )
         return false;
         
-    if ( isDefined( level.flag[ sFlag ] ) )
+    if ( isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    level.flag[ sFlag ] = false;
+    level.aFlags[ sFlag ] = false;
 }
 
 remove( sFlag ) {
-    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+    if ( !isDefined( sFlag ) || !isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    level.flag[ sFlag ] = undefined;
+    level.aFlags[ sFlag ] = undefined;
 }
 
 set( sFlag ) {
-    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+    if ( !isDefined( sFlag ) || !isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    level.flag[ sFlag ] = true;
+    level.aFlags[ sFlag ] = true;
     level notify( sFlag );
 }
 
 get( sFlag ) {
-    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+    if ( !isDefined( sFlag ) || !isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    if ( !level.flag[ sFlag ] )
+    if ( !level.aFlags[ sFlag ] )
         return false;
         
     return true;
@@ -66,19 +66,19 @@ isset( sFlag ) {
 }
 
 waitfor( sFlag ) {
-    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+    if ( !isDefined( sFlag ) || !isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    while ( !level.flag[ sFlag ] )
+    while ( !level.aFlags[ sFlag ] )
         level waittill( sFlag );
 }
 
 clear( sFlag ) {
-    if ( !isDefined( sFlag ) || !isDefined( level.flag[ sFlag ] ) )
+    if ( !isDefined( sFlag ) || !isDefined( level.aFlags[ sFlag ] ) )
         return false;
         
-    if ( level.flag[ sFlag ] ) {
-        level.flag[ sFlag ] = false;
+    if ( level.aFlags[ sFlag ] ) {
+        level.aFlags[ sFlag ] = false;
         level notify( sFlag );
     }
 }
